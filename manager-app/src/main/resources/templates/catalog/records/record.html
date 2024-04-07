@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о пластинке</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .record {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .record h2 {
+            margin-top: 0;
+        }
+
+        .record p {
+            margin-bottom: 5px;
+        }
+
+        .record img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .songs {
+            margin-top: 20px;
+        }
+
+        .song {
+            margin-bottom: 5px;
+        }
+
+        nav {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #666;
+            text-align: left;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        nav a:hover {
+            background-color: #444;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+    </style>
 </head>
 <body>
-$END$
+<nav>
+    <a data-th-href="@{/catalog/records/list}">К списку</a>
+    <a data-th-href="@{/catalog/records/{recordId}/edit(recordId = ${record.id})}">Обновить данные</a>
+</nav>
+<div class="container">
+    <div class="record">
+        <h2 th:text="${record.artist + ' - ' + record.albumTitle}"></h2>
+        <p>Genre: <span th:text="${record.genre}"></span></p>
+        <p>Year: <span th:text="${record.year}"></span></p>
+        <p>Price: $<span th:text="${record.price}"></span></p>
+        <img th:src="@{'/path/to/image/' + ${record.id} + '.jpg'}" alt="Album Cover">
+    </div>
+
+    <div class="songs">
+        <h3>Songs</h3>
+        <ul>
+            <li th:each="song : ${record.songs}" class="song">
+                <span th:text="${song.orderNumber + '. ' + song.name}"></span>
+            </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

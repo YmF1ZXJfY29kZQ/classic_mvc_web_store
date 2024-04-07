@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Каталог пластинок</title>
   <style>
+
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -23,6 +24,11 @@
     .record h3 {
       margin-top: 0;
     }
+    .header{
+      align-items: baseline;
+      display: flex;
+      gap: 10px;
+    }
     .record p {
       margin-bottom: 5px;
     }
@@ -30,7 +36,11 @@
 </head>
 <body>
 <div class="container">
-  <h1>Каталог пластинок</h1> <a data-th-href="@{/}">Назад</a>
+  <div class = "header">
+    <h1>Каталог пластинок</h1>
+    <a data-th-href="@{/}">Назад</a>
+    <a data-th-href="@{/catalog/records/create}">Добавить новую</a>
+  </div>
   <div id="records-container">
     <div class="record" th:each="record : ${records}">
       <h3 th:text="${record.artist} + ' - ' + ${record.albumTitle}"></h3>
@@ -38,6 +48,9 @@
       <p>Year: <span th:text="${record.year}"></span></p>
       <p>Price: $<span th:text="${record.price}"></span></p>
       <a data-th-href="@{/catalog/records/{recordId}(recordId = ${record.id})}">More info about</a>
+      <form method="post" data-th-action="@{/catalog/records/{recordId}/delete(recordId = ${record.id})}">
+        <button type="submit">Remove it</button>
+      </form>
     </div>
   </div>
 </div>
