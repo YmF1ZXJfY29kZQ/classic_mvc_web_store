@@ -49,11 +49,19 @@
     </style>
 </head>
 <body>
+<div data-th-if="${errors}">
+    <h2>
+        There are errors
+    </h2>
+    <ul>
+        <li data-th-each="error: ${errors}" data-th-text="${error}"></li>
+    </ul>
+</div>
 <div class="container">
     <h2>Создание новой записи</h2>
     <form method="post" data-th-action="@{/catalog/records/create}">
         <label for="artist">Исполнитель:</label>
-        <input type="text" id="artist" name="artist" required>
+        <input type="text" id="artist" name="artist" data-th-value="${payload?.artist()}" required>
 
         <label for="albumTitle">Название альбома:</label>
         <input type="text" id="albumTitle" name="albumTitle" required>
