@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание новой записи</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Создание новой записи</h2>
+    <form method="post" data-th-action="@{/catalog/records/create}">
+        <label for="artist">Исполнитель:</label>
+        <input type="text" id="artist" name="artist" required>
+
+        <label for="albumTitle">Название альбома:</label>
+        <input type="text" id="albumTitle" name="albumTitle" required>
+
+        <label for="genre">Жанр:</label>
+        <input type="text" id="genre" name="genre" required>
+
+        <label for="year">Год выпуска:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="price">Цена:</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+
+        <input type="submit" value="Создать запись">
+    </form>
+</div>
+</body>
+</html>

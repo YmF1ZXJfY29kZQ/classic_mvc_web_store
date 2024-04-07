@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог пластинок</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 960px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+    .record {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    .record h3 {
+      margin-top: 0;
+    }
+    .record p {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Каталог пластинок</h1> <a data-th-href="@{/}">Назад</a>
+  <div id="records-container">
+    <div class="record" th:each="record : ${records}">
+      <h3 th:text="${record.artist} + ' - ' + ${record.albumTitle}"></h3>
+      <p>Genre: <span th:text="${record.genre}"></span></p>
+      <p>Year: <span th:text="${record.year}"></span></p>
+      <p>Price: $<span th:text="${record.price}"></span></p>
+      <a data-th-href="@{/catalog/records/{recordId}(recordId = ${record.id})}">More info about</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
